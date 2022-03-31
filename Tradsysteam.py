@@ -71,6 +71,7 @@ def get_info_stockprice():
 
 
 def Trade_buy():
+    """买入股票流程"""
     stock_Askone.append(stocks_Ask_inf[0])
     # 分别取出买一卖一的盘口数据
     for ask_price, vol, x, y in stock_Askone:
@@ -90,6 +91,7 @@ def Trade_buy():
 
 
 def Trade_sell():
+    """卖出股票流程"""
     stock_Bidone.append(stocks_Bid_inf[0])
     # 分别取出买一卖一的盘口数据
     for bid_price, vol, x, y in stock_Bidone:
