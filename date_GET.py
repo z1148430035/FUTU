@@ -12,9 +12,9 @@ pd.set_option('display.max_colwidth',1000)
 ############################ 全局变量设置 ############################
 FUTUOPEND_ADDRESS = '127.0.0.1'  # FutuOpenD 监听地址
 FUTUOPEND_PORT = 11111  # FutuOpenD 监听端口
-STOCK_CODE = 'HK.00388'
-STRAT_DAY = '2022-04-01'
-END_DAY = '2022-04-01'
+STOCK_CODE = 'HK.00388'     #设置股票代码
+STRAT_DAY = '2022-04-01' #设置开始日期
+END_DAY = '2022-04-01'   #设置结束日期
 NUB=50
 START=True
 stocks_inf_1M = []
