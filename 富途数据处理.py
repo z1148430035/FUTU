@@ -90,6 +90,7 @@ GET_HISTROY()
 stoks_1M()
 inof = list_of_groups(stock, 9)
 df = pd.DataFrame(data=inof,)
+df.columns=['Time','OPEN','CLOSE','HIGH','LOW','VOLUME','TURNOVER','change_rate','lc']
 print(df)
 
 quote_context.close()
