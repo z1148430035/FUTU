@@ -13,7 +13,7 @@ pd.set_option('display.max_colwidth', 1000)
 ############################ 全局变量设置 ############################
 FUTUOPEND_ADDRESS = '127.0.0.1'  # FutuOpenD 监听地址
 FUTUOPEND_PORT = 11111  # FutuOpenD 监听端口
-STOCK_CODE = 'HK.09988'  # 设置股票代码
+STOCK_CODE = []  # 设置股票代码
 STRAT_DAY = '2012-04-13'  # 设置开始日期
 END_DAY = '2022-04-13'  # 设置结束日期
 NUB = 50
@@ -74,14 +74,26 @@ def go_tosql():
     df = pd.DataFrame(data=inof, )
     df.columns = ['Time', 'OPEN', 'CLOSE', 'HIGH', 'LOW', 'VOLUME', 'TURNOVER', 'change_rate', 'lc']
     engine = create_engine('mysql+pymysql://root:mylove520@localhost/stocks_day?charset=utf8')
-    df.to_sql(name=STOCK_CODE, con=engine, if_exists='append', index=True)
+    df.to_sql(name=STOCK_CODE, con=engine, if_exists='replace', index=True)
+"""导入股票代码"""
+cs=[]
+df=pd.read_csv('stocks.csv')
+df.columns=['stocks_code']
+for i in df['stocks_code']:
+    cs.append(i)
+
+for ic in cs:
+    STOCK_CODE=ic
+    GET_HISTROY()
+    stoks_1M()
+    inof = list_of_groups(stock, 9)
+    go_tosql()
+
 
 
 """提取数据"""
 
-GET_HISTROY()
-stoks_1M()
-inof = list_of_groups(stock, 9)
-go_tosql()
+
+
 
 quote_context.close()
