@@ -22,6 +22,7 @@ def Getwarrtant_Code(Stock_code):
     req.cur_price_max = 0.24
     req.cur_price_min = 0.05
     werrt_code = []
+    werrt_size=[]
 
     """设置导入数据"""
     ret, ls = quote_ctx.get_warrant(Stock_code, req)
@@ -29,7 +30,7 @@ def Getwarrtant_Code(Stock_code):
         warrant_data_list, last_page, all_count = ls
         df = pd.DataFrame(data=warrant_data_list)
         df = df.loc[:, ["stock", "name", "issuer", "lot_size", "bid_price", "ask_price", "bid_vol", "ask_vol",
-                        "delta", "strike_price", "conversion_ratio"]]
+                        "delta", "strike_price", "conversion_ratio","lot_size"]]
     else:
         print('error: ', ls)
 
@@ -46,7 +47,10 @@ def Getwarrtant_Code(Stock_code):
     """导出涡轮数据"""
     for i in range(len(df.index)):
         werrt_code.append(df.stock[i])
-    return werrt_code
+        werrt_size.append(df.lot_size[i])
+    return werrt_code,werrt_size
+
+
 
     """范例使用该函数"""
     # import get_warrtant_code as gwc 导入模组，把此文件放到一起
